@@ -1,0 +1,25 @@
+---
+- name: To create partition
+  hosts: db
+  tasks: 
+  - name: creating 2GB partition
+    parted:
+      device: /dev/sdf
+      number: 1
+      state: present
+      part_start: 1MiB
+      part_end: 2GiB
+  - name: Format the disk partition
+    filesystem:
+      fstype: xfs
+      dev: /dev/sdf1
+  - name: Create directory
+    file:
+      dest: /data
+      state: directory
+  - name: Mount the partition
+    mount: 
+      path: /data
+      src: /dev/sdf1
+      fstype: xfs
+      state: mounted

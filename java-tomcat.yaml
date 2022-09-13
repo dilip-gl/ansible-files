@@ -1,0 +1,19 @@
+---
+ - name: Install Java & Tomcat
+   hosts: all
+   tasks:
+   - name: Install Java
+     yum: 
+       name: java
+       state: latest
+   - name: Download tomcat package
+     get_url: 
+       url: https://dlcdn.apache.org/tomcat/tomcat-8/v8.5.82/bin/apache-tomcat-8.5.82.tar.gz
+       dest: /usr/local
+   - name: Extract tomcat package
+     unarchive:
+       src: /usr/local/apache-tomcat-8.5.82.tar.gz
+       dest: /usr/local
+       remote_src: yes
+   - name: start tomcat services
+     shell: nohup /usr/local/apache-tomcat-8.5.82/bin/startup.sh

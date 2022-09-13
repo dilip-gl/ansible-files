@@ -1,0 +1,14 @@
+---
+- name: testing
+  hosts: web
+  tasks:
+    - name: Install
+      yum:
+        name: httpd
+        state: present
+      notify: restart httpd
+  handlers:
+    - name: restart httpd
+      service:
+        name: httpd
+        state: restarted

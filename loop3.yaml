@@ -1,0 +1,17 @@
+---
+- name: creating users with selected
+  hosts: web
+  tasks:
+    - name: Creating User
+      user:
+        name: "{{ item.name }}"
+        state: present
+        shell: /bin/sh
+        createhome: yes
+        home: /tmp/"{{ item.name}}"
+        groups: "{{ item.groups }}"
+      loop:
+        - name: user1
+          groups: ec2-user
+        - name: user2
+          groups: root

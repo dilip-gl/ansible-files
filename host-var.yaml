@@ -1,0 +1,14 @@
+---
+ - name: host variables
+   hosts: web
+   tasks:
+   - name: Installingpackage
+     yum: 
+       name: "{{ pkg1 }}"
+       state: present
+   - name: start service
+     service:
+       name: "{{ srv1 }}"
+       state: started
+       enabled: yes
+     

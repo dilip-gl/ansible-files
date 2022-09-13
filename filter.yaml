@@ -1,0 +1,30 @@
+---
+- name: To Demonstrate use of TAGS
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Operation using Tag1
+      debug:
+        msg:
+          - "Hi, This is Debug message 1"
+      tags: 
+        - first
+    - name: Operation using Tag2
+      debug:
+        msg:
+          - "Hi, This is Debug message 2"
+      tags:
+        - second
+    - name: Operation using Tag3
+      debug:
+        msg:
+          - "Hi, This is Debug message 3"
+      tags:
+        - third
+    - name: Operation using Tag4
+      debug:
+        msg:
+          - "Hi, This is Debug message 4"
+      tags:
+        - fourth
+

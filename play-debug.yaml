@@ -1,0 +1,17 @@
+---
+ - name: Debug Test
+   hosts: web
+   tasks:
+     - name: show details
+       debug:
+         msg: "System {{ inventory_hostname }} has uuid {{ ansible_product_uuid }}"
+         
+     - debug:
+         msg: "System {{ ansible_distribution }} has gateway {{ ansible_default_ipv4.gateway }}"
+
+     - shell: /usr/bin/uptime
+       register: result
+
+     - debug: 
+         var: result
+         verbosity: 1

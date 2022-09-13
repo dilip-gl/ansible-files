@@ -1,0 +1,4 @@
+pkg1: httpd
+srv1: httpd
+user1: vignesh
+file1: /f1

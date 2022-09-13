@@ -1,0 +1,10 @@
+---
+- name: Configure User
+  hosts: all
+  tasks:
+    - name: create user
+      user:
+        name: abc
+        uid: 4000
+        state: present
+

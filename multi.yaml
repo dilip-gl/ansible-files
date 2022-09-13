@@ -1,0 +1,15 @@
+---
+ - name: Multi functionality
+   hosts: web
+   tasks: 
+     - name: Adding line to existing file
+       lineinfile:
+         path: /etc/motd
+         line: "Welcome to the Global Logic Group Infra {{ ansible_facts.distribution  }}"
+         state: present
+     - name: Getting info regarding any file
+       stat:
+         path: /etc/passwd
+       register: results
+     - name: Display the stat results
+       debug: var=results

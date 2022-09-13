@@ -1,0 +1,26 @@
+---
+- name: localhost
+  hosts: localhost
+  connection: local
+  tasks: 
+  - name: Launch Ec2 Instance
+    ec2:
+      instance_type: t2.micro
+      key_name: kp28
+      image: ami-0568773882d492fc8
+      region: us-east-2
+      group: launch-wizard-21
+      count: 1
+      vpc_subnet_id: subnet-0bca07f7df96c9104
+      wait: yes
+      assign_public_ip: yes
+
+
+
+#key_name: kp28
+#instance_type: t2.micro
+#image: ami-0568773882d492fc8
+#wait: yes
+#count: 3
+#vpc_subnet_id: subnet-0bca07f7df96c9104
+#assign_public_ip: yes

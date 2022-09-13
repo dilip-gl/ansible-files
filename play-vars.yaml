@@ -1,0 +1,34 @@
+---
+ - name: Set a Web Server
+   hosts: web
+   vars: 
+       web_pkg: httpd
+       firewall_pkg: firewalld
+       web_service: httpd
+       rule: http
+   tasks: 
+   - name: Installing Webserver & Firewalld
+     yum: 
+       name: 
+         - "{{ web_pkg }}"
+         - "{{ firewall_pkg }}"
+   - name: Ensure Firewall service is started
+     service: 
+       name: "{{ firewall_pkg }}"
+       state: started
+       enabled: true
+   - name: Ensure Apache service is started
+     service:
+       name: "{{ web_service }}"
+       state: started
+       enabled: true
+   - name: Define index.html file
+     copy:
+       content: "Setting web server for GLOBAL LOGIC"
+       dest: /var/www/html/index.html
+   - name: Adding http to Firewall Rule
+     firewalld:
+       service: "{{ rule }}"
+       permanent: true
+       immediate: true
+       state: enabled

@@ -1,0 +1,31 @@
+---
+ - name: Enable Intranet Website
+   hosts: db
+   tasks:
+     - name: Install latest version of httpd & firewall
+       yum: 
+         name:
+           - httpd
+           - firewalld
+         state: latest
+     - name: Test html page is added
+       copy: 
+   #      content: "Hello Welcome to Ansible"
+         src: /root/src/index.html
+         dest: /var/www/html/index.html
+     - name: Firewall running & Enabled
+       service:
+         name: firewalld
+         enabled: true
+         state: started
+     - name: Firewall permit access to https
+       firewalld:
+         service: http
+         permanent: true
+         immediate: yes
+         state: enabled
+     - name: Httpd and running
+       service:
+         name: httpd
+         enabled: true
+         state: started

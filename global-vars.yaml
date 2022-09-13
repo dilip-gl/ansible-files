@@ -1,0 +1,23 @@
+---
+ - name: superplay
+   hosts: web
+   tasks:
+   - name: Variable file
+     include_vars: /root/viggy
+   - name: Installing package
+     yum:
+       name: "{{ pkg1 }}"
+       state: present
+   - name: start service
+     service: 
+       name: "{{ srv1 }}"
+       state: started
+       enabled: yes
+   - name: creating user
+     user:
+       name: "{{ user1}}"
+       state: present
+   - name: creating file
+     file:
+       dest: "{{ file1 }}"
+       state: touch
